@@ -35,7 +35,7 @@ def inf():
     inference_Analysis.crime_by_area_type()
     inference_Analysis.crime_by_area_type_count()
     inference_Analysis.crime_area_age_group()
-    inference_Analysis.crime_area_age_group_top5()
+    inference_Analysis.crime_area_age_group_some()
     print("inf ends----------------------------------------")
 
 
