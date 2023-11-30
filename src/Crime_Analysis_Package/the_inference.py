@@ -6,7 +6,7 @@ import seaborn as sns
 pd.set_option('display.max_columns', None)
 import warnings
 warnings.filterwarnings('ignore')
-from Crime_Analysis_Package import The_EDA
+from Crime_Analysis_Package import the_eda
 
 #Reading the values and storing it in a dataframe using pandas
 df = pd.read_csv('https://media.githubusercontent.com/media/Aquibgitt/Crime_Data_Analysis/main/Crime_Data_from_2020_to_Present.csv') 
@@ -43,8 +43,10 @@ class inference_Analysis:
         axes[0].set_ylabel('Crime Count')
         axes[0].set_title('Crime Rate by Month (Matplotlib)')
 
+        crime_counts_df = pd.DataFrame({'Month': crime_counts.index, 'Crime_Count': crime_counts.values})
+
         # Seaborn plot
-        sns.lineplot(data=crime_counts, x=crime_counts.index, y=crime_counts.values, marker='o', ax=axes[1])
+        sns.lineplot(data=crime_counts_df, x=crime_counts.index, y=crime_counts.values, marker='o', ax=axes[1])
         axes[1].set_xlabel('Month')
         axes[1].set_ylabel('Crime Count')
         axes[1].set_title('Crime Rate by Month (Seaborn)')
@@ -98,7 +100,7 @@ class inference_Analysis:
         Returns:
         None (Displays a side-by-side comparison of crime distribution by age group using Matplotlib and Seaborn)
         """
-        data_frame = The_EDA.eda_Exploration.binning()
+        data_frame = the_eda.eda_Exploration.binning()
             
             #data_frame = The_EDA.eda_Exploration.binning()
             # Correlation between age group and crime description.
@@ -153,7 +155,7 @@ class inference_Analysis:
         None (Displays a heatmap illustrating the multivariate correlation)
         """
         # Binning the age group
-        data_frame = The_EDA.eda_Exploration.binning()
+        data_frame = the_eda.eda_Exploration.binning()
         
         # Correlation between age group, crime description, and area
         correlation_data = data_frame.groupby(['Age_Group', 'Crm Cd Desc', 'AREA']).size().unstack(fill_value=0)
@@ -168,5 +170,41 @@ class inference_Analysis:
         plt.ylabel('Crime Description - Age Group', size=15)
 
         plt.show()
+
+
+    def crime_area_age_group_some():
+        """
+        Explores the correlation between the top 10 crime types, age groups, and geographical areas in Los Angeles.
+
+        Returns:
+        None (Displays a heatmap illustrating the multivariate correlation)
+        """
+        
+        # Binning the age group
+        df = the_eda.eda_Exploration.binning()
+        crime_type_counts = df['Crm Cd Desc'].value_counts().head(10)
+
+        # Extracting the names of the crime types
+        crime_type_names = crime_type_counts.index.tolist()
+        
+        # Filter data_frame for only the top 10 crime types
+        top_crime_types = df[df['Crm Cd Desc'].isin(crime_type_names)]
+        
+        # Correlation between age group, crime description, and area for top crime types
+        correlation_data = top_crime_types.groupby(['Age_Group', 'Crm Cd Desc', 'AREA']).size().unstack(fill_value=0)
+
+        # Setting the figure size and DPI for better resolution
+        plt.figure(figsize=(30, 20))
+
+        # Create a heatmap with a different color palette
+        sns.heatmap(correlation_data, cmap='YlGnBu', annot=True, fmt='d', cbar_kws={'label': 'Count'})
+        plt.title('Correlation Between Top 10 Crime Types, Age Groups, and Areas', size=20)
+        plt.xlabel('Area', size=15)
+        plt.ylabel('Crime Description - Age Group', size=15)
+
+        plt.show()
+
+
+
 
    
