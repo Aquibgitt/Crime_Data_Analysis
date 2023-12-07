@@ -2,6 +2,7 @@
 from .the_eda import EdaExploration
 from .the_inference import InferenceAnalysis
 
+
 """
 Here we are calling different functions through main so that it could work with -m command. here we are calling the both things eda and inf.
 """
