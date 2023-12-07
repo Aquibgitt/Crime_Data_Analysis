@@ -1,6 +1,6 @@
 # The_Inference_Class
 """
-Importing the required libraries. 
+Importing all the required libraries. 
 """
 import pandas as pd
 import numpy as np
@@ -157,9 +157,9 @@ class InferenceAnalysis:
         Returns:
         None (Displays a side-by-side comparison of crime distribution by age group using Matplotlib and Seaborn)
         """
-        data_frame = the_eda.eda_Exploration.binning()
+        data_frame = the_eda.EdaExploration.binning()
 
-        # data_frame = The_EDA.eda_Exploration.binning()
+        # data_frame = The_EDA.EdaExploration.binning()
         # Correlation between age group and crime description.
         # Create a pivot table to count occurrences of each age group and crime description with the Heat Map.
         correlation_data = (
@@ -230,7 +230,7 @@ class InferenceAnalysis:
         None (Displays a heatmap illustrating the multivariate correlation)
         """
         # Binning the age group
-        data_frame = the_eda.eda_Exploration.binning()
+        data_frame = the_eda.EdaExploration.binning()
 
         # Correlation between age group, crime description, and area
         correlation_data = (
@@ -265,7 +265,7 @@ class InferenceAnalysis:
         """
 
         # Binning the age group
-        df = the_eda.eda_Exploration.binning()
+        df = the_eda.EdaExploration.binning()
         crime_type_counts = df["Crm Cd Desc"].value_counts().head(10)
 
         # Extracting the names of the crime types

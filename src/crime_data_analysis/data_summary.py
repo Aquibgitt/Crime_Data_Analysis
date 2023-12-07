@@ -10,7 +10,7 @@ df = pd.read_csv(
 )
 
 
-class data:
+class Data:
     """
     This class contains all the functions needed for data reading,interpretation and cleaning.
     """
